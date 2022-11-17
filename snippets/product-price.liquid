@@ -1,0 +1,182 @@
+<!-- snippet/product-price.liquid -->
+{% if product.title %}
+  {%- assign compare_at_price = product.compare_at_price -%}
+  {%- assign price = product.price -%}
+  {%- assign price_varies = false -%}
+  {%- assign available = product.available -%}
+{% else %}
+  {%- assign compare_at_price = 1999 -%}
+  {%- assign price = 1999 -%}
+  {%- assign price_varies = false -%}
+  {%- assign available = true -%}
+{% endif %}
+{% if compare_at_price > price %}
+	{%- assign price_varies = true -%}
+{% endif %}
+{%- assign money_price = price | money -%}
+
+{% if compare_at_price > price %}
+  {% if price_varies %}
+	<!-- PRICE VARIES 1 -->
+    <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+    <span class="product-price__price"><s>{{ compare_at_price | money }}</s> 
+      
+      <span class="product-price__price product-price__sale" style="display: inline; margin-left: 5px;">
+        {{ money_price }} 
+
+        <!-- HC - Custom field removed - 06 May '20 -->
+        {% comment %}
+        {% if product.metafields.custom_fields["custum_unit"] != blank %}{{ product.metafields.custom_fields["custum_unit"] }}{% endif %}
+        {% endcomment %}
+
+        <span class="product-price__sale-label visually-hidden">{{ 'products.product.on_sale' | t }}</span>
+      </span>
+      
+      {% if product.metafields.custom_fields["collection_info_1"] != blank %}
+        <span class="custom-field custom-field__collection_info_1 custom-field__type--text" style="color: #162950; font-weight: normal;">
+          {{ product.metafields.custom_fields["collection_info_1"] }}
+        </span>
+      {% endif %}
+      
+      <!-- HC - Custom field removed - 06 May '20 -->
+      {% comment %}
+      {% if product.metafields.custom_fields["custum_unit"] != blank %}{{ product.metafields.custom_fields["custum_unit"] }}{% endif %}
+      {% endcomment %}
+
+	</span>
+
+    {% if product.metafields.custom_fields["collection_info_2"] != blank %}
+      <span class="custom-field custom-field__collection_info_2 custom-field__type--text">
+        <div class="custom-field--value">
+          {{ product.metafields.custom_fields["collection_info_2"] }}
+        </div>
+      </span>
+    {% endif %}
+    
+	<span class=" stamped-product-reviews-badge" data-product-sku="{{ product.handle }}" data-id="{{ product.id }}" style="display:block;">{{ product.metafields.stamped.badge }}</span>
+  {% else %}
+    <!-- PRICE 1 -->
+    <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+    <span class="product-price__price"><s>{{ compare_at_price | money }}</s>
+	</span>
+    <span class="product-price__price product-price__sale" style="margin-left: 5px;">
+      {{ money_price }} 
+      
+      {% if product.metafields.custom_fields["collection_info_1"] != blank %}
+        <span class="custom-field custom-field__collection_info_1 custom-field__type--text 1" style="color: #162950; font-weight: normal;">
+          {{ product.metafields.custom_fields["collection_info_1"] }}
+        </span>
+      {% endif %}
+      
+      <!-- HC - Custom field removed - 06 May '20 -->
+      {% comment %}
+      {% if product.metafields.custom_fields["custum_unit"] != blank %}{{ product.metafields.custom_fields["custum_unit"] }}{% endif %}
+      {% endcomment %}
+      
+      <span class="product-price__sale-label visually-hidden">{{ 'products.product.on_sale' | t }}</span>
+    </span>
+
+    {% if product.metafields.custom_fields["collection_info_2"] != blank %}
+      <span class="custom-field custom-field__collection_info_2 custom-field__type--text">
+        <div class="custom-field--value">
+          {{ product.metafields.custom_fields["collection_info_2"] }}
+        </div>
+      </span>
+    {% endif %}
+
+    <span class=" stamped-product-reviews-badge" data-product-sku="{{ product.handle }}" data-id="{{ product.id }}" style="display:block;">{{ product.metafields.stamped.badge }}</span>
+  {% endif %}
+{% else %}
+
+  {% if price_varies %}
+	<!-- PRICE VARIES 2 -->
+    <span class="product-price__price">{{ money_price }}
+      
+      {% if product.metafields.custom_fields["collection_info_1"] != blank %}
+        <span class="custom-field custom-field__collection_info_1 custom-field__type--text 2" style="color: #162950; font-weight: normal;">
+          {{ product.metafields.custom_fields["collection_info_1"] }}
+        </span>
+      {% endif %}
+      
+      <!-- HC - Custom field removed - 06 May '20 -->
+      {% comment %}
+      {% if product.metafields.custom_fields["custum_unit"] != blank %}{{ product.metafields.custom_fields["custum_unit"] }}{% endif %}
+      {% endcomment %}
+
+</span>
+  {% else %}
+	<!-- PRICE 2 -->
+    <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+    <span class="product-price__price">{{ money_price }} 
+
+      {% if product.metafields.custom_fields["collection_info_1"] != blank %}
+        <span class="custom-field custom-field__collection_info_1 custom-field__type--text 3" style="color: #162950; font-weight: normal;">
+          {{ product.metafields.custom_fields["collection_info_1"] }}
+        </span>
+      {% endif %}
+      
+      <!-- HC - Custom field removed - 06 May '20 -->
+      {% comment %}
+      {% if product.metafields.custom_fields["custum_unit"] != blank %}{{ product.metafields.custom_fields["custum_unit"] }}{% endif %}
+      {% endcomment %}
+
+
+      {% comment %}
+      {% if product.metafields.custom_fields["custum_unit"] != blank %}
+        <span class="custom-field custom-field__custum-unit custom-field__type--text">
+          <div class="custom-field--value">
+            {{ product.metafields.custom_fields["custum_unit"] }}
+          </div>
+        </span>
+      {% endif %}
+      {% endcomment %}
+    </span>
+
+    {% comment %} 
+      <span class="static_pri"> Min order 
+        {% if product.metafields.custom_fields["min_order"] != blank %}
+          <span class="custom-field custom-field__min-order custom-field__type--text">
+            <div class="custom-field--value">
+              {{ product.metafields.custom_fields["min_order"] }}
+            </div>
+          </span>
+        {% endif %}
+      </span>
+    {% endcomment %} 
+    
+
+    <form action="/cart/add" method="post" id="product-form-{{ product.id }}">   
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+      <div>
+        <button type="submit" name="add">Add to cart</button>
+      </div>  
+    </form>
+  {% endif %}
+
+
+
+<!-- HC - Custom field added - 06 May '20 -->
+{% comment %} 
+{% if product.metafields.custom_fields["quantity_per_order"] != blank %}
+<div class="hc-custom">
+  {{ product.metafields.custom_fields["quantity_per_order"] }}
+</div>
+{% endif %}
+{% endcomment %} 
+
+{% if product.metafields.custom_fields["collection_info_2"] != blank %}
+  <span class="custom-field custom-field__collection_info_2 custom-field__type--text">
+    <div class="custom-field--value">
+      {{ product.metafields.custom_fields["collection_info_2"] }}
+    </div>
+  </span>
+{% endif %}
+
+  <!-- STAMPED SHOULD BE HERE -->
+  <span class=" stamped-product-reviews-badge" data-product-sku="{{ product.handle }}" data-id="{{ product.id }}" style="display:block;">{{ product.metafields.stamped.badge }}</span>
+{% endif %}
+{% comment %}
+{% unless available %}
+<span class="product-price__sold-out">{{ 'products.product.sold_out' | t }}</span>
+{% endunless %}
+{% endcomment %}

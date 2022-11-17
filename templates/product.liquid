@@ -1,0 +1,160 @@
+
+<!-- spurit_stp-added -->
+{% render 'spurit_stp-product-snippet' %}
+<!-- /spurit_stp-added -->
+
+<script>
+	$(function () {
+      setTimeout(function () {
+        $quantityInput.trigger('input');
+      }, 2500);
+      
+      var $quantityInput = $('input.product-form__input[name="quantity"]');
+      $quantityInput.on('input', function () {
+        if (Spurit.tieredPricing.loaded) {
+          updatePrice(parseInt(this.value));
+        }
+      });
+
+      $('select[name="id"]').change(function () {
+		if (Spurit.tieredPricing.loaded) {
+          updatePrice(parseInt($quantityInput.val()));
+        }
+      });
+
+      function updatePrice(quantity) {
+        var scheme = getCurrentScheme();
+        var price = getCurrentVariantPrice();
+        var tier = getTargetTier(scheme, quantity);
+        var $priceElem = $('.product-price__price:not(.stp-price-clone)');
+        var $priceElemClone = $('.product-price__price.stp-price-clone');
+
+        if (tier) {
+          if (!$priceElemClone.length) {
+            $priceElemClone = createPriceClone($priceElem);
+          }
+
+          $priceElem.addClass('stp-compare-price');
+          $priceElemClone.find('#ProductPrice-clone').text('$' + getDiscountedPrice(price, tier));
+        } else {
+          $priceElem.removeClass('stp-compare-price');
+          $priceElemClone.remove();
+        }
+      }
+
+      function getCurrentScheme() {
+        var pid = '{{ product.id }}';
+        var schemes = Spurit.tieredPricing.config.schemes;
+
+        for (var i = 0; i < schemes.length; i++) {
+          if (schemes[i].products.indexOf(pid) !== -1) {
+              return schemes[i];
+          }
+        }
+      }
+
+      function getTargetTier(scheme, quantity) {
+        var tiers = scheme.tiers;
+        quantity = quantity || 0;
+
+        for (var i = 0; i < tiers.length; i++) {
+          if (tiers[i].quantity > quantity) {
+            return i ? tiers[i - 1] : null;
+          }
+        }
+
+        return tiers.length ? tiers[i - 1] : null;
+      }
+
+      function getCurrentVariantPrice() {
+        var product = Spurit.tieredPricing.snippet.product;
+        var vid = +$('select[name="id"]').val();
+
+        for (var i = 0; i < product.variants.length; i++) {
+          if (product.variants[i].id === vid) {
+            return product.variants[i].price / 100;
+          }
+        }
+
+        return null;
+      }
+
+      function getDiscountedPrice(price, tier) {
+        var newPrice = (tier.discount_units === 'percentage') ? price * (1 - tier.discount / 100) : price - tier.discount;
+        return (newPrice > 0 ? newPrice : 0).toFixed(2);
+      }
+
+      function createPriceClone(priceElem) {
+          var $priceElemClone = $(priceElem).clone();
+          $priceElemClone.addClass('stp-price-clone');
+          $priceElemClone.find('#ProductPrice-product-template').attr('id', 'ProductPrice-clone');
+          $(priceElem).after($priceElemClone);
+
+          return $priceElemClone;
+      }
+    });
+</script>
+
+{% comment %}
+  The contents of the product.liquid template can be found in /sections/product-template.liquid
+{% endcomment %}
+
+{% section 'product-template' %}
+{% section 'custom-fields-products' %}
+<script>
+  // Override default values of shop.strings for each template.
+  // Alternate product templates can change values of
+  // add to cart button, sold out, and unavailable states here.
+  theme.productStrings = {
+    addToCart: {{ 'products.product.add_to_cart' | t | json }},
+    soldOut: {{ 'products.product.sold_out' | t | json }},
+    unavailable: {{ 'products.product.unavailable' | t | json }}
+  }
+</script>
+<script text="text/javascript">
+  var _learnq = _learnq || [];
+
+  var item = {
+    Name: {{ product.title|json }},
+    ProductID: {{ product.id|json }},
+    Categories: {{ product.collections|map:'title'|json }},
+    ImageURL: "https:{{ product.featured_image.src|img_url:'grande' }}",
+    URL: "{{ shop.secure_url }}{{ product.url }}",
+    Brand: {{ product.vendor|json }},
+    Price: {{ product.price|money|json }},
+  };
+
+  _learnq.push(['track', 'Viewed Product', item]);
+  _learnq.push(['trackViewedItem', {
+    Title: item.Name,
+    ItemId: item.ProductID,
+    Categories: item.Categories,
+    ImageUrl: item.ImageURL,
+    Url: item.URL,
+    Metadata: {
+      Brand: item.Brand,
+      Price: item.Price,
+      CompareAtPrice: item.CompareAtPrice
+    }
+  }]);
+</script>
+{% include 'easy_suggestion' %}
+<style type="text/css">
+  @media only screen and (max-width: 749px){
+    .return-link-wrapper {
+        margin-bottom: 0;
+    }
+  }
+</style>
+<script>
+  if(window.location.href.includes('/products')){
+    var country_code;
+    var product_prefixes = ['online:en:US:Alligator Meat', 'online:en:US:Swordfish Steaks', 'online:en:US:Lump Blue Crab', 'online:en:US:Mentaiko', 'online:en:US:Stir Fry Mix', 'online:en:US:Yellow Lake Perch', 'online:en:US:Halibut', 'online:en:US:Sockeye Salmon', 'online:en:US:Ground Tuna', 'online:en:US:Hamachi Collar', 'online:en:US:Lobster Bisque', 'online:en:US:Jack Mackeral', 'online:en:US:8 to 10 oz. Tails', 'online:en:US:Potato Cod Cheddar Chive', 'online:en:US:King Crab Legs', 'online:en:US:Lake White Fish', 'online:en:US:Atlantic Cod', 'online:en:US:5 to 6 oz. Tails', 'online:en:US:Mahi Mahi', 'online:en:US:Sardines', 'online:en:US:Octopus Legs', 'online:en:US:Barramundi', 'online:en:US:Tilapia', 'online:en:US:Blue Mussels', 'online:en:US:Norwegian Salmon', 'online:en:US:Whole-Shell Clam', 'online:en:US:Jumbo Red Shrimp', 'online:en:US:Jumbo Prawns', 'online:en:US:Grilled Eel', 'online:en:US:Seaweed Salad', 'online:en:US:Cuttlefish', 'online:en:US:Haddock Loin', 'online:en:US:Orange Roughy', 'online:en:US:Sashimi Variety Pack', 'online:en:US:Pacific Grouper', 'online:en:US:Gumbo Soup', 'online:en:US:Calamari Rings', 'online:en:US:Calamari Tubes and Tentacles', 'online:en:US:Yellowtail Loin', 'online:en:US:Breaded Shrimp', 'online:en:US:Tarako', 'online:en:US:Snapper', 'online:en:US:Seared Bonito', 'online:en:US:Snow Crab Legs', 'online:en:US:Sea Scallops', 'online:en:US:XL Gulf Pink Shrimp', 'online:en:US:Mussels with Butter and Garlic', 'online:en:US:Crab Cakes', 'online:en:US:Walleye', 'online:en:US:Clam Chowder', 'online:en:US:Breaded Clam Strips', 'online:en:US:Yellowfin Tuna Steak', 'online:en:US:Sushi Shrimp', 'online:en:US:XL White Shrimp', 'online:en:US:Colossal Prawns', 'online:en:US:Mackerel Fillets', 'online:en:US:Chilean Seabass', 'online:en:US:She Crab Soup', 'online:en:US:Saku Block Tuna', 'online:en:US:3 to 4 oz. Tails'];
+    var id = '{{ product.id }}_{{ product.selected_or_first_available_variant.id }}';
+
+    var product_title = "{{ product.title }}";
+    var product_price = '{{ product.price | money_without_currency }}';
+    var product_type  = '{{ product.type }}';
+    var product_id = product_prefixes.map(product_prefix => product_prefix + id);
+  }
+</script>

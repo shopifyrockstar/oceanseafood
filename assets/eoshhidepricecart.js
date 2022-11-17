@@ -1,0 +1,1 @@
+window.onload=function(){var eoShFileExist=document.querySelector("script[src*='https://sf-hidepriceaddtocart.extendons.com']");if(eoShFileExist==null){document.getElementsByTagName("html")[0].style.opacity = "1";document.getElementsByTagName("html")[0].style.pointerEvents = "all";}}

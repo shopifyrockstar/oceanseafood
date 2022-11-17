@@ -1,0 +1,11 @@
+
+
+<script type="text/javascript">
+  if(window.location.search.includes('selector_mode')){
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'discounted-pricing.herokuapp.com/selector.js';;
+    script.type = 'text/javascript';
+    head.appendChild(script);
+  }
+</script>

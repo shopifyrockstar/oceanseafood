@@ -1,0 +1,41 @@
+<div class="custom-fields-section">
+  
+    {% if resource_type == "products" %}
+    <div class="custom-fields-section__products">
+      {% for block in blocks %}
+      {% if block.type contains "cf_" %}
+      <div class="custom-fields-section__item custom-fields-section__item--{{ block.type }} custom-fields-section__item--{{ block.type }}--{{ block.settings.key }}" {{ block.shopify_attributes }}>
+        {% case block.settings.key %}
+        
+          {% when "collection_info_1" %}
+            {% render "custom_fields.products.collection_info_1" %}
+        
+          {% when "collection_info_2" %}
+            {% render "custom_fields.products.collection_info_2" %}
+        
+          {% when "description_1" %}
+            {% render "custom_fields.products.description_1" %}
+        
+          {% when "description_2" %}
+            {% render "custom_fields.products.description_2" %}
+        
+          {% when "description_3" %}
+            {% render "custom_fields.products.description_3" %}
+        
+          {% when "description_4" %}
+            {% render "custom_fields.products.description_4" %}
+        
+          {% when "description_5" %}
+            {% render "custom_fields.products.description_5" %}
+        
+          {% when "price_info" %}
+            {% render "custom_fields.products.price_info" %}
+        
+        {% endcase %}
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  
+</div>

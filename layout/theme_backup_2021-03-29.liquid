@@ -1,0 +1,547 @@
+<!doctype html>
+<!--[if IE 9]> <html class="ie9 no-js" lang="{{ shop.locale }}"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="{{ shop.locale }}"> <!--<![endif]-->
+<head>
+  {% include 'pre-header' %}
+ {% include 'yett' %}
+ {% include 'SEOManager' %}
+ 
+<meta name="google-site-verification" content="KcBkU_wZ5NNJueH5GknR5IM9OeiA-JfhLT_Rw2eZZuw" /> 
+<meta name="google-site-verification" content="C4ueOuYCgOlbgGAJHTny93MEpoV7pOGaHGEj2Ze5pNg" />
+ 
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+  <meta name="theme-color" content="{{ settings.color_button }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {% if settings.favicon != blank %}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {% endif %}
+
+
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  {% include 'google-fonts' %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script>
+    var theme = {
+      strings: {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }},
+        showMore: {{ 'general.filters.show_more' | t | json }},
+        showLess: {{ 'general.filters.show_less' | t | json }},
+        addressError: {{ 'sections.map.address_error' | t | json }},
+        addressNoResults: {{ 'sections.map.address_no_results' | t | json }},
+        addressQueryLimit: {{ 'sections.map.address_query_limit_html' | t | json }},
+        authError: {{ 'sections.map.auth_error_html' | t | json }}
+      },
+      moneyFormat: {{ shop.money_format | json }}
+    }
+
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+  </script>
+
+  <!--[if (lte IE 9) ]>{{ 'match-media.min.js' | asset_url | script_tag }}<![endif]-->
+
+  {% if template.directory == 'customers' %}
+    <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script><!--<![endif]-->
+    <!--[if lte IE 9]><script src="{{ 'shopify_common.js' | shopify_asset_url }}"></script><![endif]-->
+  {% endif %}
+
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'lazysizes.min.js' | asset_url }}"></script><![endif]-->
+
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'vendor.js' | asset_url }}"></script><![endif]-->
+
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'theme.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if lte IE 9]><script src="{{ 'theme.js' | asset_url }}"></script><![endif]-->
+
+  {{ content_for_header }}
+
+
+      {{ 'paymentfont.scss.css' | asset_url | stylesheet_tag }}
+    
+{% comment %}
+<!--rh_code_block_v_3_start_init_pixel-->
+
+Everything inside this block is generated and may be automaticaly deleted.
+
+This piece of Liquid template code is injected to the layout/theme.liquid by ROI Hunter Easy application
+and it contains code that is necessary for correct functioning of Facebook pixel and conversion tracking
+It is strongly recommended not to change the code
+{% endcomment %}
+
+{% comment %}
+(This comment is used to identify ROI Hunter Easy application script. Please don't change this comment)
+Begin of ROI Hunter Easy code
+{% endcomment %}
+<script type="text/javascript">
+
+(function(window, document) {
+
+    if (window.rheasy_fbq) return;
+    console.log('easy');
+    window.rheasy_fbq = (function() {
+        if (arguments.length === 0) {
+            return;
+        }
+
+        var pixelId, trackType, contentObj;     //get parameters:
+
+        if (typeof arguments[0] === 'string') pixelId = arguments[0];       //param string PIXEL ID
+        if (typeof arguments[1] === 'string') trackType = arguments[1];     //param string TRACK TYPE (PageView, Purchase)
+        if (typeof arguments[2] === 'object') contentObj = arguments[2];    //param object (may be null):
+                                                                            //    {value : subtotal_price,
+                                                                            //     content_type : some_string,
+                                                                            //     currency : shop_curency,
+                                                                            //     contents : [{id, quantity, item_price}, ...] instance of array
+                                                                            //    }
+
+        var argumentsAreValid = typeof pixelId === 'string' && pixelId.replace(/\s+/gi, '') !== '' &&
+            typeof trackType === 'string' && trackType.replace(/\s+/gi, '') !== '';
+
+        if (!argumentsAreValid) {
+            console.error('RH PIXEL - INVALID ARGUMENTS');
+            return;
+        }
+
+        var params = [];
+        params.push('id=' + encodeURIComponent(pixelId));
+        switch (trackType) {
+            case 'PageView':
+            case 'ViewContent':
+            case 'Search':
+            case 'AddToCart':
+            case 'InitiateCheckout':
+            case 'AddPaymentInfo':
+            case 'Lead':
+            case 'CompleteRegistration':
+            case 'Purchase':
+            case 'AddToWishlist':
+                params.push('ev=' + encodeURIComponent(trackType));
+                break;
+            default:
+                console.error('RH PIXEL - BAD TRACKTYPE');
+                return;
+        }
+
+        params.push('dl=' + encodeURIComponent(document.location.href));
+        if (document.referrer) params.push('rl=' + encodeURIComponent(document.referrer));
+        params.push('if=false');
+        params.push('ts=' + new Date().getTime());
+
+        /* Custom parameters to string */
+        if (typeof contentObj === 'object') {                                               //`contents : [{id, quantity, item_price}, ...]` to string
+            for (var u in contentObj) {
+                if (typeof contentObj[u] === 'object' && contentObj[u] instanceof Array) {  // `[{id, quantity, item_price}, ...]` to string
+                    if (contentObj[u].length > 0) {
+                        for (var y = 0; y < contentObj[u].length; y++) {
+                            if (typeof contentObj[u][y] === 'object') {                     // `{id, quantity, item_price}` to string
+                                contentObj[u][y] = JSON.stringify(contentObj[u][y]);
+                            }
+                            contentObj[u][y] = (contentObj[u][y] + '')  //JSON to string
+                                .replace(/^\s+|\s+$/gi, '')             //delete white characterts from begin on end of the string
+                                .replace(/\s+/gi, ' ')                  //replace white characters inside string to ' '
+                        }
+                        params.push('cd[' + u + ']=' + encodeURIComponent(contentObj[u].join(',')   //create JSON array - [param1,param2,param3]
+                            .replace(/^/gi, '[')
+                            .replace(/$/gi, ']')))
+                    }
+                } else if (typeof contentObj[u] === 'string') {
+                    params.push('cd[' + u + ']=' + encodeURIComponent(contentObj[u]));
+                }
+            }
+        }
+
+        var imgId = new Date().getTime();
+        var img = document.createElement('img');
+        img.id = 'fb_' + imgId, img.src = 'https://www.facebook.com/tr/?' + params.join('&'), img.width = 1, img.height = 1, img.style = 'display:none;';
+        document.head.appendChild(img);
+        window.setTimeout(function() { var t = document.getElementById('fb_' + imgId);
+            t.parentElement.removeChild(t); }, 1000);
+
+    });
+})(window, document);
+
+    rheasy_fbq('153504522006043', 'PageView');
+</script>
+{% comment %}
+(This comment is used to identify ROI Hunter Easy application script. Please don't change this comment)
+End of ROI Hunter Easy code
+{% include 'hide-amazon-pay' %}
+<!--rh_code_block_v_3_end_init_pixel-->
+{% endcomment %}
+  <script type='text/javascript'>var jiltStorefrontParams = {{ shop.metafields.jilt_storefront | json }}; {% if customer %}jiltStorefrontParams.customerID = {{ customer.id }};{% endif %}</script>
+
+
+{% include 'gsf-conversion-pixels' %}
+  
+  {% include 'minmaxify-head' %}
+</head>
+<body class="template-{{ template | split: '.' | first }}">
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MWZSQRT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+<div id="SearchDrawer" class="search-bar drawer drawer--top">
+    <div class="search-bar__table">
+      <div class="search-bar__table-cell search-bar__form-wrapper">
+        <form class="search search-bar__form" action="/search" method="get" role="search">
+          <button class="search-bar__submit search__submit btn--link" type="submit">
+            {% include 'icon-search' %}
+            <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
+          </button>
+          <input class="search__input search-bar__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
+        </form>
+      </div>
+      <div class="search-bar__table-cell text-right">
+        <button type="button" class="btn--link search-bar__close js-drawer-close">
+          {% include 'icon-close' %}
+          <span class="icon__fallback-text">{{ 'general.search.close' | t }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {% section 'header' %}
+
+  <div class="page-container" id="PageContainer">
+
+    <main class="main-content" id="MainContent" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+
+  </div>
+  <script type="text/javascript">
+  var _learnq = _learnq || [];
+
+  _learnq.push(['account', 'JeUt8h']);
+
+  (function () {
+  var b = document.createElement('script'); b.type = 'text/javascript'; b.async = true;
+  b.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'a.klaviyo.com/media/js/analytics/analytics.js';
+  var a = document.getElementsByTagName('script')[0]; a.parentNode.insertBefore(b, a);
+  })();
+</script>
+        {% include 'booster-discounts' %}
+<!-- google dynamic remarketing tag for theme.liquid -->
+    {% if template contains 'product' %}
+		<script type="text/javascript">
+             var json_product = {{ product | json' }};
+        </script>
+        <script>
+            var ecomm_prodid=[];
+            for(var i=0;i<json_product.variants.length;i++)
+                ecomm_prodid.push('shopify_US_{{product.id}}_'+json_product.variants[i].id);
+        </script>
+        <script type="text/javascript">
+            var google_tag_params = {
+                ecomm_prodid: ecomm_prodid,
+                ecomm_pagetype: 'product',
+                ecomm_totalvalue: parseFloat('{{ product.price | money_without_currency | remove: ","}}')
+            };
+        </script>
+    {% elsif template contains 'collection' %}
+        <script type="text/javascript">
+            var google_tag_params = {
+                ecomm_pagetype: 'category'
+            };
+        </script>
+    {% elsif template contains 'cart' %}
+        <script type="text/javascript">
+        var id = new Array();
+        {% for item in cart.items %}
+        id.push('shopify_US_{{item.product.id}}_{{item.variant.id}}');
+        {% endfor %}
+        
+            var google_tag_params = {
+                ecomm_prodid: id,
+                ecomm_pagetype: 'cart',
+                ecomm_totalvalue: parseFloat('{{ cart.total_price | money_without_currency | remove: ","}}')
+            };
+        </script>
+    {% elsif template contains 'search' %}
+        <script type="text/javascript">
+            var google_tag_params = {
+                ecomm_pagetype: 'searchresults'
+        };
+        </script>
+    {% elsif template contains 'index' %}
+        <script type="text/javascript">
+            var google_tag_params = {
+                ecomm_pagetype: 'home'
+            };
+        </script>
+    {% else %}
+        <script type="text/javascript">
+            var google_tag_params = {
+                ecomm_pagetype: 'other'
+            };
+        </script>
+    {% endif %}
+ <!-- Google Code for Remarketing Tag -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 868719892;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/868719892/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+  
+
+
+
+
+
+{% include 'ajaxify-cart' %}
+  
+{% include 'limitsify' %}
+	        {% include 'social-login' %}
+
+{% comment %}
+This piece of Liquid template code is injected to the layout/theme.liquid.
+This code is rendered directly within every page.
+{% endcomment %}
+
+<script type="text/javascript" id="roihuntereasy">
+/* <![CDATA[ */
+  // original ecomm_prodid = 'shopify_{{ shopify_store_country  }}_{{ item.product.id }}_{{ item.variant.id }}'
+  {% if template contains 'cart' %}
+  var roihuntereasy_google_tag_params = {
+      ecomm_prodid: [{% for item in cart.items %}'shopify_{{ item.product.id }}_{{ item.variant.id }}'{% unless forloop.last %}, {% endunless %}{% endfor %}],
+      ecomm_pagetype: 'cart',
+      ecomm_totalvalue: {{ cart.total_price | money_without_currency | remove: '.' | remove: ','  | divided_by: 100.0 }}
+  };
+
+  {% elsif template contains 'collection' %}
+  var roihuntereasy_google_tag_params = {
+      ecomm_prodid: [{% for item in collection.products limit:5 %}'shopify_{{ item.id }}_{{ item.variants.first.id }}'{% unless forloop.last %}, {% endunless %}{% endfor %}],
+      ecomm_pagetype: 'category',
+      ecomm_category: '{{ collection.handle }}'
+  };
+
+  {% elsif template contains 'product' %}
+  var roihuntereasy_google_tag_params = {
+      ecomm_prodid: 'shopify_{{ product.id }}_{{ product.selected_or_first_available_variant.id }}',
+      ecomm_pagetype: 'product',
+      ecomm_totalvalue: {{ product.price | money_without_currency | remove: '.' | remove: ','  | divided_by: 100.0 }}
+  };
+  {% endif %}
+
+  /* Load Script function we may need to load jQuery from the Google's CDN */
+  /* That code is world-reknown. */
+  /* One source: http://snipplr.com/view/18756/loadscript/ */
+  var loadScript = function(url, callback){
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+
+    // If the browser is Internet Explorer.
+    if (script.readyState){
+      script.onreadystatechange = function(){
+        if (script.readyState == "loaded" || script.readyState == "complete"){
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    // For any other browser.
+    } else {
+      script.onload = function(){
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  };
+
+  if (typeof Shopify.checkout === 'undefined')    { 
+  loadScript('https://www.googleadservices.com/pagead/conversion_async.js', function(){
+    window.google_trackConversion({
+      google_conversion_id: 868719892,
+      google_custom_params: window.roihuntereasy_google_tag_params,
+      google_remarketing_only: true
+    })
+  });
+}
+
+
+/* ]]> */
+</script>{% comment %}
+This piece of Liquid template code is injected to the layout/theme.liquid by ROI Hunter Easy application
+and it contains code that is necessary for correct functioning of Facebook pixel and conversion tracking
+It is strongly recommended not to change the code
+{% endcomment %}
+
+{% comment %}
+(This comment is used to identify ROI Hunter Easy application script. Please don't change this comment)
+Begin of ROI Hunter Easy code
+{% endcomment %}
+<script type="text/javascript" id="fb_roihuntereasy">
+/* <![CDATA[ */
+{% if template contains 'cart' %}
+    var cart_items = [
+        {% for item in cart.items %}
+            {
+                id: 'shopify_{{ item.product.id }}_{{ item.variant.id }}',
+                quantity: '{{ item.quantity }}',
+                item_price: '{{ item.price | money_without_currency | remove: '.' | remove: ','  | divided_by: 100.0 }}'
+            }
+            {% unless forloop.last %}
+            ,
+            {% endunless %}
+        {% endfor %}
+    ];
+
+    var params = {
+        value: '{{ cart.total_price | money_without_currency | remove: '.' | remove: ','  | divided_by: 100.0 }}',
+        content_type: 'product',
+        currency: '{{ shop.currency }}',
+        contents: cart_items
+    };
+
+    {% if cart.item_count != 0 %}
+
+        rheasy_fbq('153504522006043', 'AddToCart', params);
+
+    {% endif %}
+
+{% elsif template contains 'product' %}
+    var params = {
+        value: '{{ product.price | money_without_currency | remove: '.' | remove: ','  | divided_by: 100.0 }}',
+        content_name: '{{ product.title  | replace: "'", "\\'"}}',
+        content_type: 'product',
+        currency: '{{ shop.currency }}',
+        content_ids: [ 'shopify_{{ product.id }}_{{ product.selected_or_first_available_variant.id }}' ]
+    };
+
+    rheasy_fbq('153504522006043', 'ViewContent', params);
+
+{% endif %}
+/* ]]> */
+</script>
+
+  <!-- spurit_stp-added -->
+{% render 'spurit_stp-theme-snippet' %}
+<!-- /spurit_stp-added -->
+
+
+<div class="ot-facebook-reviews"></div>
+
+<script async type="text/javascript" id="stamped-script-widget" data-api-key="pubkey-06Hi0BrBz5G41eaN3w57KkCk5tFTEI" src="https://cdn1.stamped.io/files/widget.min.js"></script>
+
+{% include 'advanced-delivery' %}
+{% include 'subscribe-it-helper' %}
+
+<script>
+var replaced = false;  
+
+   
+$(window).on('keyup keypress scroll touch click mousemove', function(e) {
+   
+
+   if(!replaced){
+console.log('yett unblocked');
+     window.yett.unblock() ;
+     
+       replaced = true;
+   }
+});
+</script>
+<script>
+function addEventListenerStamped(el, eventName, handler) { 
+   if (el.addEventListener) { el.addEventListener(eventName, handler); }
+   else { el.attachEvent('on' + eventName, function () { handler.call(el); }); } 
+}
+
+addEventListenerStamped(document, 'stamped:reviews:loaded', function(e) {
+  console.log(e);
+    var ratingCount = $('meta[itemprop="reviewCount"]').attr('content');
+    var ratingValue = $('meta[itemprop="ratingValue"]').attr('content');
+        var richSnippet = {
+            "@context": "http://schema.org",
+            "@type": "Product",
+             "@id": "{{ shop.url | append: '/products/' | append: product.handle }}#product"
+        }
+
+        if (parseInt(ratingValue) > 0){
+            richSnippet.aggregateRating = {
+                "@type": "AggregateRating",
+                "ratingValue": ratingValue,
+                "reviewCount": ratingCount
+            }
+        }
+        var script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.innerHTML = JSON.stringify(richSnippet);
+        document.getElementsByTagName('head')[0].appendChild(script);
+});
+</script>
+</body>
+    <!-- StartDeliveryDateRange version: 2.0 -->
+    <script>
+      var DeliveryDateRangeData = (function() {
+        var data = {
+          product: null,
+          settings: {{ shop.metafields.delivery_date_range.user_setting | json }},
+          cartProducts: []
+        };
+
+        {% if product %}
+          {% assign collection_titles = product.collections | map: 'title' | downcase %}
+          var variants = [];
+          {% for var in product.variants %}
+            var variant = {}
+            variant['id'] = {{ var.id }};
+            variant['inventory_quantity'] = {{ var.inventory_quantity }};
+            variant['sku'] = "{{ var.sku }}";
+            variants.push(variant);
+          {% endfor %}
+          data.product = (function() {
+            return {
+              tags: {{ product.tags | json }},
+              collections: {{ collection_titles }},
+              vendor: "{{ product.vendor | downcase }}",
+              type: "{{ product.type | downcase }}",
+              available: {{ product.available }},
+              inventory_quantity: "{{ product.selected_or_first_available_variant.inventory_quantity }}",
+              variants: variants,
+              sku: "{{ product.selected_or_first_available_variant.sku }}"
+            }
+          })();
+        {% endif %}
+        {% if cart.items.size > 0 %}
+          {% for item in cart.items %}
+            {% assign collection_titles = item.product.collections | map: 'title' | downcase %}
+            data.cartProducts.push(function() {
+              return {
+                variant_id: "{{ item.variant_id }}",
+                inventory_quantity: "{{ item.variant.inventory_quantity }}",
+                tags: {{ item.product.tags | json }},
+                sku: "{{ item.variant.sku | downcase }}",
+                collections: {{ collection_titles }},
+                vendor: "{{ item.product.vendor | downcase }}",
+                type: "{{ item.product.type | downcase }}"
+              }
+            }());
+          {% endfor %}
+        {% endif %}
+
+        return data;
+      })();
+
+    </script>
+    <!-- EndDeliveryDateRange -->
