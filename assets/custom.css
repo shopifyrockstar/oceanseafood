@@ -1,0 +1,60 @@
+.hidden{
+    display: none !important;
+}
+.modal-wrapper.hidden{
+    display: none;
+}
+.modal-wrapper{
+    display: block;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background-color: white;
+}
+.modal-wrapper .modal-content-wrapper{
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.modal-wrapper .modal-content-wrapper .content-wrapper{
+    text-align: center;
+}
+.local-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 50px;
+    gap: 0 10px;
+}
+.local-wrapper > div{
+    width: 50%;
+    text-align: center;
+    border: 1px solid black;
+    padding: 10px;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nonlocal-wrapper{
+    margin-top: 50px;
+}
+.nonlocal-wrapper a{
+    border: 1px solid black;
+    padding: 20px;
+    display: block;
+    text-align: center;
+    max-width: 150px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
