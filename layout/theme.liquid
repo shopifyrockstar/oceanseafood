@@ -200,8 +200,8 @@ End of ROI Hunter Easy code
       </div>
       <div class="zipcontent-wrapper">
         <div class="title-wrapper">
-          <h3>Please check service availability</h3>
-          <h3>Please enter your zipcode below</h3>
+          <h4>Do we service your area?</h4>
+          <h4>Please enter your zipcode below</h4>
         </div>
         <div class="content-wrapper">
           <input type="text" id="zipcode_box" class="zipcode-box" name="zipcode_box" placeholder="Zip Code?">
@@ -209,15 +209,15 @@ End of ROI Hunter Easy code
       </div>
       <div class="local-wrapper hidden">
         <div class="stay-wrapper">
-          <a href="">Home Delivery</a>
+          <a href=""><img src="{{ 'ups.png' | asset_img_url: 'master' }}"></a>
         </div>
         <div class="away-wrapper">
-          <a href="https://oceansideseafood.market/">Howell Seafood Market & Michigan Seafood Roadshow</a>
+          <a href="https://oceansideseafood.market/"><img src="{{ 'truck.png' | asset_img_url: 'master' }}"></a>
         </div>
       </div>
       <div class="nonlocal-wrapper hidden">
-        <h3>Yes, we deliver to your city!</h3>
-        <a href="https://oceansideseafood.market/">Continue</a>
+        <h4>Yes, we deliver to your city!</h4>
+        <a href="{{ routes.url }}">Continue</a>
       </div>
     </div>
   </div> 
@@ -552,12 +552,10 @@ addEventListenerStamped(document, 'stamped:reviews:loaded', function(e) {
           localStorage.setItem('local_user', 'true');
           document.getElementsByClassName('zipcontent-wrapper')[0].classList.add('hidden');
           document.getElementsByClassName('local-wrapper')[0].classList.remove('hidden');
-          //window.location.href = '/';
         }else{
-          localStorage.setItem('local_user', 'false');
+          localStorage.setItem('local_user', 'true');
           document.getElementsByClassName('zipcontent-wrapper')[0].classList.add('hidden');
           document.getElementsByClassName('nonlocal-wrapper')[0].classList.remove('hidden');
-          //window.location.href= 'https://oceansideseafood.market/';
         }
       }
     });
