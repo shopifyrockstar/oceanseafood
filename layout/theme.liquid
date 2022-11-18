@@ -24,6 +24,7 @@
 
 
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'custom.css' | asset_url | stylesheet_tag }}
   {% include 'google-fonts' %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script>
@@ -175,7 +176,7 @@ Begin of ROI Hunter Easy code
     rheasy_fbq('153504522006043', 'PageView');
 </script>
 {% comment %}
-(This comment is used to identify ROI Hunter Easy application script. Please don't change this comment)
+(This comment is used to identify ROI Hunter Easy application script. Please dont change this comment)
 End of ROI Hunter Easy code
 {% include 'hide-amazon-pay' %}
 <!--rh_code_block_v_3_end_init_pixel-->
@@ -185,9 +186,41 @@ End of ROI Hunter Easy code
 
 {% include 'gsf-conversion-pixels' %}
   
-  {% include 'minmaxify-head' %}
+  {% comment %} {% include 'minmaxify-head' %} {% endcomment %}
+  <script>
+    const available_zipcode_list = [48007, 48009, 48012, 48015, 48017, 48021, 48025, 48026, 48030, 48033, 48034, 48035, 48036, 48037, 48038, 48042, 48043, 48044, 48045, 48046, 48047, 48051, 48066, 48067, 48068, 48069, 48070, 48071, 48072, 48073, 48075, 48076, 48080, 48081, 48082, 48083, 48084, 48085, 48086, 48088, 48089, 48090, 48091, 48092, 48093, 48094, 48095, 48096, 48098, 48099, 48101, 48103, 48104, 48105, 48106, 48107, 48108, 48109, 48110, 48111, 48112, 48113, 48114, 48115, 48116, 48117, 48118, 48120, 48121, 48122, 48123, 48124, 48125, 48126, 48127, 48128, 48130, 48131, 48134, 48135, 48136, 48137, 48138, 48139, 48141, 48143, 48146, 48150, 48151, 48152, 48153, 48154, 48158, 48159, 48160, 48162, 48164, 48165, 48166, 48167, 48168, 48169, 48170, 48173, 48174, 48175, 48176, 48178, 48179, 48180, 48183, 48184, 48185, 48186, 48187, 48188, 48189, 48190, 48191, 48192, 48193, 48195, 48197, 48198, 48201, 48202, 48203, 48204, 48205, 48206, 48207, 48208, 48209, 48210, 48211, 48212, 48213, 48214, 48215, 48216, 48217, 48218, 48219, 48220, 48221, 48222, 48223, 48224, 48225, 48226, 48227, 48228, 48229, 48231, 48232, 48233, 48234, 48235, 48237, 48238, 48239, 48240, 48242, 48243, 48244, 48255, 48260, 48264, 48265, 48266, 48267, 48268, 48269, 48272, 48275, 48277, 48278, 48279, 48288, 48301, 48302, 48303, 48304, 48306, 48307, 48308, 48309, 48310, 48311, 48312, 48313, 48314, 48315, 48316, 48317, 48318, 48320, 48321, 48322, 48323, 48324, 48325, 48326, 48327, 48328, 48329, 48330, 48331, 48332, 48333, 48334, 48335, 48336, 48340, 48341, 48342, 48343, 48346, 48347, 48348, 48350, 48353, 48356, 48357, 48359, 48360, 48361, 48362, 48363, 48370, 48371, 48374, 48375, 48376, 48377, 48380, 48381, 48382, 48383, 48386, 48387, 48390, 48391, 48393, 48397, 48414, 48415, 48417, 48418, 48420, 48429, 48430, 48433, 48436, 48438, 48439, 48442, 48449, 48451, 48457, 48460, 48462, 48473, 48476, 48480, 48501, 48507, 48532, 48554, 48601, 48602, 48603, 48604, 48605, 48606, 48607, 48608, 48609, 48611, 48612, 48613, 48614, 48615, 48616, 48617, 48618, 48620, 48622, 48623, 48624, 48625, 48626, 48628, 48631, 48632, 48634, 48637, 48638, 48640, 48641, 48642, 48649, 48650, 48652, 48655, 48657, 48658, 48662, 48663, 48667, 48670, 48674, 48686, 48701, 48706, 48707, 48708, 48710, 48722, 48724, 48732, 48733, 48734, 48747, 48757, 48787, 48801, 48804, 48805, 48806, 48807, 48808, 48809, 48811, 48812, 48813, 48815, 48816, 48817, 48818, 48819, 48820, 48821, 48822, 48823, 48824, 48825, 48826, 48827, 48829, 48830, 48831, 48832, 48833, 48834, 48835, 48836, 48837, 48838, 48840, 48841, 48842, 48843, 48844, 48845, 48846, 48847, 48848, 48849, 48850, 48851, 48852, 48853, 48854, 48855, 48856, 48857, 48858, 48859, 48860, 48861, 48862, 48864, 48865, 48866, 48867, 48870, 48871, 48872, 48873, 48874, 48875, 48876, 48877, 48878, 48879, 48880, 48881, 48882, 48883, 48884, 48885, 48886, 48887, 48888, 48889, 48890, 48891, 48892, 48893, 48894, 48895, 48896, 48897, 48901, 48906, 48908, 48909, 48910, 48911, 48912, 48913, 48915, 48916, 48917, 48918, 48919, 48922, 48924, 48929, 48930, 48933, 48937, 48951, 48956, 48980, 49001, 49002, 49003, 49004, 49005, 49006, 49007, 49008, 49009, 49010, 49011, 49012, 49014, 49015, 49016, 49017, 49018, 49019, 49020, 49021, 49024, 49026, 49029, 49033, 49034, 49035, 49036, 49037, 49040, 49041, 49046, 49048, 49050, 49051, 49052, 49053, 49055, 49058, 49060, 49062, 49065, 49066, 49067, 49068, 49070, 49071, 49072, 49073, 49074, 49076, 49077, 49078, 49079, 49080, 49081, 49082, 49083, 49087, 49088, 49089, 49092, 49093, 49094, 49096, 49097, 49201, 49202, 49203, 49204, 49220, 49224, 49229, 49230, 49233, 49234, 49236, 49237, 49240, 49241, 49245, 49246, 49249, 49250, 49251, 49252, 49253, 49254, 49257, 49258, 49259, 49261, 49263, 49264, 49265, 49269, 49272, 49277, 49281, 49282, 49283, 49284, 49285, 49286, 49287, 49301, 49302, 49303, 49304, 49305, 49306, 49307, 49309, 49310, 49311, 49312, 49314, 49315, 49316, 49317, 49318, 49319, 49320, 49321, 49322, 49323, 49325, 49326, 49327, 49328, 49329, 49330, 49331, 49332, 49333, 49335, 49336, 49337, 49338, 49339, 49340, 49341, 49342, 49343, 49344, 49345, 49346, 49347, 49348, 49349, 49351, 49355, 49356, 49357, 49401, 49402, 49403, 49404, 49405, 49408, 49412, 49413, 49415, 49417, 49418, 49419, 49420, 49421, 49423, 49424, 49425, 49426, 49427, 49428, 49429, 49430, 49431, 49435, 49437, 49442, 49444, 49445, 49446, 49448, 49449, 49450, 49451, 49452, 49454, 49455, 49456, 49457, 49459, 49460, 49461, 49464, 49468, 49501, 49502, 49503, 49504, 49505, 49506, 49507, 49508, 49509, 49510, 49512, 49514, 49515, 49516, 49518, 49519, 49523, 49525, 49528, 49530, 49534, 49544, 49546, 49548, 49555, 49560, 49588, 49599, 49623, 49631, 49639, 49642, 49677, 49679];
+  </script>  
 </head>
-<body class="template-{{ template | split: '.' | first }}">
+
+<body class="template-{{ template | split: '.' | first }}">      
+  <div id="modal-wrapper" class="modal-wrapper hidden">
+    <div class="modal-content-wrapper">
+      <div class="logo-wrapper">
+        <img src="https://cdn.shopify.com/s/files/1/1401/6351/files/logo_540x.png?v=1613785686">
+      </div>
+      <div class="zipcontent-wrapper">
+        <div class="title-wrapper">
+          <h4>Do we service your area?</h4>
+          <h4>Please enter your zipcode below</h4>
+        </div>
+        <div class="content-wrapper">
+          <input type="text" id="zipcode_box" class="zipcode-box" name="zipcode_box" placeholder="Zip Code?">
+        </div>        
+      </div>
+      <div class="local-wrapper hidden">
+        <div class="stay-wrapper">
+          <a href=""><img src="{{ 'ups.png' | asset_img_url: 'master' }}"></a>
+        </div>
+        <div class="away-wrapper">
+          <a href="https://oceansideseafood.market/"><img src="{{ 'truck.png' | asset_img_url: 'master' }}"></a>
+        </div>
+      </div>
+      <div class="nonlocal-wrapper hidden">
+        <h4>Yes, we deliver to your city!</h4>
+        <a href="{{ routes.url }}">Continue</a>
+      </div>
+    </div>
+  </div> 
   <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MWZSQRT"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -495,7 +528,38 @@ addEventListenerStamped(document, 'stamped:reviews:loaded', function(e) {
         document.getElementsByTagName('head')[0].appendChild(script);
 });
 </script>
-  <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=XxpbTa"></script>
+  <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=XxpbTa"></script>  
+  <script>
+  console.log(localStorage.getItem('local_user'));
+    if ( localStorage.getItem('local_user') == 'true' ){
+      document.getElementById('modal-wrapper').classList.add("hidden"); 
+    }else{
+      document.getElementById('modal-wrapper').classList.remove('hidden');
+    }
+    document.getElementById("zipcode_box").addEventListener("keyup", function(event){
+      if (event.which === 13) {
+        var inputVal = document.getElementById("zipcode_box").value;
+        var is_local_user;
+        for (var i = 0; i < available_zipcode_list.length; i++) {
+          if ( inputVal == available_zipcode_list[i] ){                        
+            is_local_user = 1;
+            break;
+          }else{            
+            is_local_user = 0;
+          }
+        }
+        if ( is_local_user == 1 ){
+          localStorage.setItem('local_user', 'true');
+          document.getElementsByClassName('zipcontent-wrapper')[0].classList.add('hidden');
+          document.getElementsByClassName('local-wrapper')[0].classList.remove('hidden');
+        }else{
+          localStorage.setItem('local_user', 'true');
+          document.getElementsByClassName('zipcontent-wrapper')[0].classList.add('hidden');
+          document.getElementsByClassName('nonlocal-wrapper')[0].classList.remove('hidden');
+        }
+      }
+    });
+  </script>
 </body>
     
     <!-- StartDeliveryDateRange version: 2.0 -->
